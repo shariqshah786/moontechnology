@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moon Technology — Business Technology &amp; Automation</title>
+<meta name="description" content="Moon Technology builds custom software, SaaS platforms and business automation systems for growing businesses ready to leave manual work behind.">
+<meta property="og:title" content="Moon Technology — We turn business problems into digital systems.">
+<meta property="og:description" content="Custom software, SaaS and automation for businesses ready to grow.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0C0E;
+    --bg-alt:#0E1114;
+    --panel:#131719;
+    --panel-2:#181D20;
+    --border:#232A2E;
+    --border-soft:#1B2124;
+    --text:#ECEFF0;
+    --text-dim:#8E9BA1;
+    --text-faint:#57646A;
+    --brass:#CE9F4C;
+    --brass-bright:#E6BB66;
+    --brass-dim:#7A6132;
+    --signal:#5FCB8B;
+    --danger:#D3695C;
+    --radius:2px;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --display:'Space Grotesk', sans-serif;
+    --body-font:'Inter', sans-serif;
+    --maxw:1240px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:88px;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body-font);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  ul{margin:0; padding:0; list-style:none;}
+  h1,h2,h3,h4{font-family:var(--display); margin:0; font-weight:600; letter-spacing:-0.01em;}
+  p{margin:0;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  section{position:relative;}
+  ::selection{background:var(--brass); color:#0A0C0E;}
+  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--brass);
+    letter-spacing:0.02em;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"//"; color:var(--text-faint);}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 24px;
+    font-family:var(--mono);
+    font-size:13.5px;
+    border-radius:var(--radius);
+    border:1px solid var(--border);
+    transition:border-color .2s ease, background .2s ease, transform .2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--brass); color:#0A0C0E; border-color:var(--brass);}
+  .btn-primary:hover{background:var(--brass-bright); border-color:var(--brass-bright); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--text);}
+  .btn-ghost:hover{border-color:var(--brass-dim); color:var(--brass-bright);}
+  .btn-arrow::after{content:"→"; transition:transform .2s ease;}
+  .btn-arrow:hover::after{transform:translateX(3px);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(10,12,14,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav{
+    max-width:var(--maxw); margin:0 auto; padding:0 32px;
+    height:72px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{display:flex; align-items:center; gap:10px; font-family:var(--display); font-size:17px; font-weight:700; letter-spacing:-0.01em;}
+  .logo-mark{
+    width:28px; height:28px; border:1px solid var(--brass); border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:13px; color:var(--brass);
+  }
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{font-size:14.5px; color:var(--text-dim); transition:color .2s ease;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{display:flex; align-items:center; gap:16px;}
+  .nav-cta .btn{padding:10px 18px;}
+  .menu-toggle{display:none; width:36px; height:36px; background:none; border:1px solid var(--border); border-radius:var(--radius); align-items:center; justify-content:center; flex-direction:column; gap:4px;}
+  .menu-toggle span{width:16px; height:1.5px; background:var(--text);}
+
+  .mobile-menu{
+    position:fixed; inset:0; background:var(--bg); z-index:99;
+    display:none; flex-direction:column; padding:100px 32px 40px;
+    transform:translateY(-8px); opacity:0; transition:opacity .25s ease, transform .25s ease; pointer-events:none;
+  }
+  .mobile-menu.open{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .mobile-menu a{font-family:var(--display); font-size:28px; padding:16px 0; border-bottom:1px solid var(--border-soft); color:var(--text);}
+  .mobile-menu .btn{margin-top:28px; justify-content:center;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:180px 0 120px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse 700px 400px at 82% 15%, rgba(206,159,76,0.08), transparent 60%),
+      var(--bg);
+  }
+  .hero-grid{
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:linear-gradient(to bottom, black, transparent 85%);
+  }
+  .hero-inner{position:relative; z-index:2; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+  .hero h1{font-size:clamp(38px, 5vw, 66px); line-height:1.04; letter-spacing:-0.02em;}
+  .hero-sub{margin-top:26px; font-size:17px; color:var(--text-dim); max-width:46ch; line-height:1.65;}
+  .hero-ctas{margin-top:36px; display:flex; gap:16px; flex-wrap:wrap;}
+
+  .hero-visual{position:relative; height:420px;}
+  .hero-chip{
+    position:absolute; background:var(--panel); border:1px solid var(--border);
+    border-radius:var(--radius); padding:14px 16px; font-family:var(--mono); font-size:12px;
+    color:var(--text-dim); box-shadow:0 20px 40px -20px rgba(0,0,0,0.6);
+    animation:float 6s ease-in-out infinite;
+  }
+  .hero-chip b{color:var(--text); font-weight:500;}
+  .hero-chip .dot{width:6px; height:6px; border-radius:50%; background:var(--signal); display:inline-block; margin-right:6px;}
+  .chip-1{top:6%; left:2%; animation-delay:0s;}
+  .chip-2{top:38%; right:4%; animation-delay:1.4s;}
+  .chip-3{bottom:10%; left:16%; animation-delay:2.8s;}
+  .chip-4{bottom:34%; right:24%; animation-delay:0.9s; width:150px;}
+  @keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
+  .hero-lines{position:absolute; inset:0; z-index:1;}
+  .hero-lines path{stroke:var(--border); stroke-width:1; fill:none; stroke-dasharray:4 6;}
+
+  /* ---------- AUTOPILOT BANNER ---------- */
+  .autopilot{padding:100px 0; border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft); background:var(--bg-alt);}
+  .autopilot-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;}
+  .autopilot h2{font-size:clamp(28px,3.4vw,40px); line-height:1.1;}
+  .autopilot-problem{margin-top:20px; font-size:16.5px; color:var(--text-dim);}
+  .autopilot-solution{margin-top:14px; font-size:16.5px; color:var(--text); line-height:1.6; max-width:50ch;}
+  .autopilot-solution b{color:var(--brass); font-weight:600;}
+  .autopilot-list{display:flex; flex-wrap:wrap; gap:12px 24px; margin:26px 0 32px;}
+  .autopilot-list li{font-family:var(--mono); font-size:13.5px; color:var(--text-dim); display:flex; align-items:center; gap:8px;}
+  .autopilot-list li::before{content:"✓"; color:var(--signal);}
+
+  .scene-hint{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--text-faint); text-align:right; margin-bottom:10px;}
+  .autopilot-scene{
+    position:relative; height:400px; border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .scene-panel{
+    position:absolute; inset:0; padding:26px; display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .scene-before{background:radial-gradient(ellipse at 25% 15%, rgba(211,105,92,0.10), transparent 55%), var(--panel);}
+  .scene-after{
+    background:linear-gradient(180deg, #131b26 0%, #2c2313 55%, #3d2a12 100%);
+    clip-path:inset(0 0 0 var(--reveal, 15%));
+  }
+  .scene-svg{width:100%; flex:1; min-height:0;}
+  .scene-label{font-family:var(--mono); font-size:11px; letter-spacing:.05em;}
+  .scene-before .scene-label{color:var(--danger);}
+  .scene-after .scene-label{color:var(--brass-bright);}
+  .scene-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .scene-tags span{font-family:var(--mono); font-size:11.5px; padding:6px 10px; border-radius:20px; border:1px solid; white-space:nowrap;}
+  .scene-before .scene-tags span{color:var(--danger); border-color:rgba(211,105,92,.4); background:rgba(211,105,92,.08);}
+  .scene-after .scene-tags span{color:var(--brass-bright); border-color:rgba(230,187,102,.45); background:rgba(230,187,102,.1);}
+  .scene-divider{position:absolute; top:0; bottom:0; left:var(--reveal,15%); width:2px; background:var(--brass); transform:translateX(-1px); z-index:2; pointer-events:none;}
+  .scene-handle{
+    position:absolute; top:50%; left:var(--reveal,15%); transform:translate(-50%,-50%); z-index:3;
+    width:40px; height:40px; border-radius:50%; background:var(--brass); color:#0A0C0E;
+    display:flex; align-items:center; justify-content:center; font-size:15px; font-family:var(--mono);
+    box-shadow:0 6px 20px rgba(0,0,0,.5); pointer-events:none;
+  }
+  .scene-range{position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; z-index:4;}
+  .jitter{animation:jitter .28s ease-in-out infinite; transform-box:fill-box; transform-origin:center;}
+  .ring{animation:pulse 1.1s ease-in-out infinite; transform-box:fill-box; transform-origin:center;}
+  .bob{animation:bob 4s ease-in-out infinite; transform-box:fill-box; transform-origin:center;}
+  @keyframes jitter{0%,100%{transform:translateX(0);} 25%{transform:translateX(-1.5px);} 75%{transform:translateX(1.5px);}}
+  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);}}
+
+  @media (max-width:980px){
+    .autopilot-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- STATS ---------- */
+  .stats{border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft); background:var(--bg-alt);}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); }
+  .stat{padding:44px 32px; border-right:1px solid var(--border-soft);}
+  .stat:last-child{border-right:none;}
+  .stat-num{font-family:var(--display); font-size:40px; font-weight:700; color:var(--brass);}
+  .stat-label{margin-top:6px; font-size:13.5px; color:var(--text-dim); font-family:var(--mono);}
+
+  /* ---------- SECTION shared ---------- */
+  .section{padding:120px 0;}
+  .section-head{max-width:640px; margin-bottom:60px;}
+  .section-head h2{font-size:clamp(30px,3.4vw,44px); line-height:1.1;}
+  .section-head p{margin-top:16px; color:var(--text-dim); font-size:16px; max-width:52ch;}
+  .alt{background:var(--bg-alt);}
+
+  /* ---------- PROBLEM / SLIDER ---------- */
+  .compare{
+    position:relative; border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; height:340px; background:var(--panel);
+  }
+  .compare-panel{position:absolute; inset:0; padding:40px; display:flex; flex-direction:column; justify-content:center;}
+  .compare-before{background:var(--panel);}
+  .compare-after{background:#141910; clip-path:inset(0 0 0 var(--reveal,50%));}
+  .compare-label{font-family:var(--mono); font-size:12px; letter-spacing:.04em; color:var(--text-faint); margin-bottom:18px;}
+  .compare-list{display:flex; flex-direction:column; gap:12px;}
+  .compare-list li{font-family:var(--mono); font-size:14.5px; display:flex; align-items:center; gap:10px;}
+  .compare-before .compare-list li{color:var(--text-dim);}
+  .compare-before .compare-list li::before{content:"×"; color:var(--danger);}
+  .compare-after .compare-list li{color:var(--text);}
+  .compare-after .compare-list li::before{content:"✓"; color:var(--signal);}
+  .compare-divider{position:absolute; top:0; bottom:0; left:var(--reveal,50%); width:2px; background:var(--brass); transform:translateX(-1px);}
+  .compare-handle{
+    position:absolute; top:50%; left:var(--reveal,50%); transform:translate(-50%,-50%);
+    width:38px; height:38px; border-radius:50%; background:var(--brass); color:#0A0C0E;
+    display:flex; align-items:center; justify-content:center; font-size:14px; font-family:var(--mono);
+    box-shadow:0 6px 20px rgba(0,0,0,.5);
+  }
+  input[type=range].compare-range{
+    position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize;
+  }
+  .compare-tag{position:absolute; top:16px; right:16px; font-family:var(--mono); font-size:11px; color:var(--text-faint); letter-spacing:.05em;}
+  .compare-after .compare-tag{color:var(--brass-dim);}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border-soft); border:1px solid var(--border-soft);}
+  .service-card{background:var(--bg-alt); padding:34px 30px; position:relative; overflow:hidden;}
+  .service-num{
+    position:absolute; top:-6px; right:14px; font-family:var(--display); font-size:76px; font-weight:700;
+    color:transparent; -webkit-text-stroke:1px var(--border); z-index:0;
+  }
+  .service-card h3{position:relative; z-index:1; font-size:19px; margin-top:6px; padding-right:40px;}
+  .service-card > p{position:relative; z-index:1; margin-top:12px; color:var(--text-dim); font-size:14.5px;}
+  .service-toggle{
+    position:relative; z-index:1; margin-top:18px; background:none; border:none; padding:0;
+    font-family:var(--mono); font-size:12.5px; color:var(--brass); display:flex; align-items:center; gap:6px;
+  }
+  .service-toggle .plus{transition:transform .2s ease;}
+  .service-card.open .service-toggle .plus{transform:rotate(45deg);}
+  .service-features{
+    position:relative; z-index:1; max-height:0; overflow:hidden; transition:max-height .3s ease, margin-top .3s ease;
+  }
+  .service-card.open .service-features{max-height:260px; margin-top:16px;}
+  .service-features li{font-size:13.5px; color:var(--text-dim); padding:6px 0; border-top:1px solid var(--border-soft);}
+  .service-features li:first-child{border-top:none;}
+
+  /* ---------- INDUSTRIES ---------- */
+  .industry-pills{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
+  .industry-pill{
+    padding:10px 18px; border:1px solid var(--border); border-radius:20px; font-size:13.5px; color:var(--text-dim);
+    background:transparent; transition:all .2s ease;
+  }
+  .industry-pill.active{background:var(--brass); border-color:var(--brass); color:#0A0C0E; font-weight:500;}
+  .industry-pill:hover:not(.active){border-color:var(--brass-dim); color:var(--text);}
+  .industry-display{
+    border:1px solid var(--border); border-radius:var(--radius); padding:44px; background:var(--panel);
+    display:grid; grid-template-columns:1fr 1.4fr; gap:40px;
+  }
+  .industry-display h3{font-size:26px;}
+  .industry-display .sub{margin-top:10px; color:var(--text-dim); font-size:14.5px;}
+  .stack-row{display:flex; flex-wrap:wrap; align-items:center; gap:0;}
+  .stack-chip{font-family:var(--mono); font-size:13.5px; padding:10px 16px; border:1px solid var(--border-soft); border-radius:var(--radius); background:var(--bg-alt); color:var(--text);}
+  .stack-plus{color:var(--brass); font-size:13px; margin:0 10px; font-family:var(--mono);}
+
+  /* ---------- CUSTOM SOFTWARE FLOW ---------- */
+  .flow-wrap{display:grid; grid-template-columns:1fr 0.9fr; gap:60px; align-items:center;}
+  .flow{display:flex; flex-direction:column;}
+  .flow-node{
+    display:flex; align-items:center; gap:18px; padding:18px 0; position:relative; opacity:.35; transition:opacity .4s ease;
+  }
+  .flow-node.lit{opacity:1;}
+  .flow-node:not(:last-child)::after{
+    content:""; position:absolute; left:15px; top:46px; width:1px; height:calc(100% - 10px); background:var(--border);
+  }
+  .flow-dot{width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:var(--text-faint); background:var(--bg-alt); flex-shrink:0; transition:all .4s ease; z-index:1;}
+  .flow-node.lit .flow-dot{border-color:var(--brass); color:var(--brass); box-shadow:0 0 0 4px rgba(206,159,76,0.12);}
+  .flow-node span.label{font-family:var(--display); font-size:19px;}
+
+  /* ---------- PORTFOLIO ---------- */
+  .work-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .work-card{
+    border:1px solid var(--border); border-radius:var(--radius); padding:28px; background:var(--panel);
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .work-card:hover{border-color:var(--brass-dim); transform:translateY(-4px);}
+  .work-cat{font-family:var(--mono); font-size:11.5px; color:var(--brass); letter-spacing:.04em; margin-bottom:14px;}
+  .work-card h3{font-size:19px; margin-bottom:14px;}
+  .work-features{font-size:13.5px; color:var(--text-dim); line-height:1.8; margin-bottom:20px;}
+  .work-link{font-family:var(--mono); font-size:13px; color:var(--text);}
+
+  /* ---------- CASE STUDIES ---------- */
+  .case{border:1px solid var(--border); border-radius:var(--radius); padding:40px; background:var(--bg-alt); margin-bottom:20px;}
+  .case:last-child{margin-bottom:0;}
+  .case-tag{font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-bottom:18px;}
+  .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+  .case-col span{display:block; font-family:var(--mono); font-size:11.5px; color:var(--brass); margin-bottom:10px;}
+  .case-col p{font-size:15px; color:var(--text-dim); line-height:1.6;}
+
+  /* ---------- PROCESS ---------- */
+  .process-track{display:flex; overflow-x:auto; gap:0; padding-bottom:10px; scrollbar-width:none;}
+  .process-track::-webkit-scrollbar{display:none;}
+  .process-step{flex:0 0 210px; padding:0 22px 0 0; position:relative;}
+  .process-step:not(:last-child)::after{content:""; position:absolute; top:22px; left:22px; right:-4px; height:1px; background:var(--border);}
+  .process-num{width:44px; height:44px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:13px; color:var(--text-faint); background:var(--bg); position:relative; z-index:1; transition:all .4s ease;}
+  .process-step.lit .process-num{border-color:var(--brass); color:var(--brass);}
+  .process-step h4{margin-top:20px; font-size:16px;}
+  .process-step p{margin-top:8px; font-size:13.5px; color:var(--text-dim);}
+
+  /* ---------- REVIEW / SUPPORT ---------- */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border-soft); border:1px solid var(--border-soft);}
+  .duo-panel{background:var(--bg-alt); padding:48px;}
+  .duo-panel h3{font-size:24px; margin-bottom:16px;}
+  .duo-panel p.desc{color:var(--text-dim); font-size:15px; margin-bottom:24px;}
+  .duo-list{display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; margin-bottom:28px;}
+  .duo-list li{font-size:13.5px; color:var(--text-dim); font-family:var(--mono); display:flex; gap:8px;}
+  .duo-list li::before{content:"—"; color:var(--brass-dim);}
+
+  /* ---------- WHY US ---------- */
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .why-card h3{font-size:17px; margin:16px 0 10px;}
+  .why-card p{font-size:14.5px; color:var(--text-dim);}
+  .why-icon{width:38px; height:38px; border:1px solid var(--border); border-radius:var(--radius); display:flex; align-items:center; justify-content:center; color:var(--brass);}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft); padding:36px 0; overflow:hidden; background:var(--bg-alt);}
+  .marquee-track{display:flex; gap:64px; width:max-content; animation:scroll 28s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  .marquee-track span{font-family:var(--mono); font-size:15px; color:var(--text-faint); white-space:nowrap;}
+  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  /* ---------- TEAM ---------- */
+  .team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .team-card{border:1px solid var(--border); border-radius:var(--radius); padding:28px; text-align:left; background:var(--panel);}
+  .avatar{width:46px; height:46px; border-radius:50%; border:1px solid var(--brass-dim); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:15px; color:var(--brass); margin-bottom:16px;}
+  .team-card h4{font-size:16px;}
+  .team-card p{font-size:13.5px; color:var(--text-dim); margin-top:6px;}
+
+  /* ---------- CTA ---------- */
+  .cta-section{border:1px solid var(--border); border-radius:var(--radius); padding:64px; background:linear-gradient(180deg, var(--panel-2), var(--bg-alt)); text-align:left;}
+  .cta-section h2{font-size:clamp(28px,3.6vw,42px); max-width:16ch;}
+  .cta-section p{margin-top:18px; color:var(--text-dim); max-width:52ch;}
+  .cta-buttons{margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:0.8fr 1.2fr; gap:60px;}
+  .quick-contact{display:flex; flex-direction:column; gap:1px; background:var(--border-soft); border:1px solid var(--border-soft); margin-top:32px;}
+  .quick-item{background:var(--bg-alt); padding:18px 20px; display:flex; align-items:center; justify-content:space-between; font-size:14px;}
+  .quick-item span{color:var(--text-dim); font-family:var(--mono); font-size:12.5px;}
+
+  .form-panel{border:1px solid var(--border); border-radius:var(--radius); padding:44px; background:var(--panel);}
+  .form-progress{display:flex; gap:6px; margin-bottom:32px;}
+  .form-progress i{flex:1; height:2px; background:var(--border-soft); border-radius:2px; transition:background .3s ease;}
+  .form-progress i.done{background:var(--brass);}
+  .form-step{display:none;}
+  .form-step.active{display:block;}
+  .form-step-label{font-family:var(--mono); font-size:12px; color:var(--text-faint); margin-bottom:10px;}
+  .form-step h3{font-size:22px; margin-bottom:22px;}
+  .field{width:100%; padding:14px 16px; background:var(--bg-alt); border:1px solid var(--border); border-radius:var(--radius); color:var(--text); font-family:var(--body-font); font-size:15px; margin-bottom:14px;}
+  .field:focus{border-color:var(--brass);}
+  textarea.field{min-height:120px; resize:vertical;}
+  select.field{appearance:none;}
+  .check-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;}
+  .check-item{display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid var(--border); border-radius:var(--radius); font-size:13.5px; color:var(--text-dim); cursor:pointer;}
+  .check-item input{accent-color:var(--brass);}
+  .check-item.checked{border-color:var(--brass-dim); color:var(--text);}
+  .form-nav{display:flex; justify-content:space-between; margin-top:24px;}
+  .form-success{text-align:center; padding:40px 0;}
+  .form-success .mark{width:56px; height:56px; border:1px solid var(--signal); border-radius:50%; color:var(--signal); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:22px;}
+  .form-success h3{font-size:22px;}
+  .form-success p{margin-top:10px; color:var(--text-dim);}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--border-soft); padding:64px 0 32px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; padding-bottom:40px; border-bottom:1px solid var(--border-soft);}
+  .footer-desc{margin-top:14px; color:var(--text-dim); font-size:14.5px; max-width:32ch;}
+  .footer-col h5{font-family:var(--mono); font-size:12px; color:var(--text-faint); margin-bottom:16px; letter-spacing:.04em;}
+  .footer-col a, .footer-col p{display:block; font-size:14.5px; color:var(--text-dim); margin-bottom:12px;}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:28px; font-size:13px; color:var(--text-faint);}
+  .status{display:flex; align-items:center; gap:8px; font-family:var(--mono);}
+  .status .dot{width:6px; height:6px; border-radius:50%; background:var(--signal); animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.3;}}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .nav-links, .nav-cta .btn-ghost{display:none;}
+    .menu-toggle{display:flex;}
+    .mobile-menu{display:flex;}
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-visual{height:280px; margin-top:20px;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .stat{border-bottom:1px solid var(--border-soft);}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .industry-display{grid-template-columns:1fr;}
+    .flow-wrap{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:1fr 1fr;}
+    .case-grid{grid-template-columns:1fr;}
+    .duo{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .team-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 20px;}
+    .hero{padding:140px 0 80px;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .services-grid{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:28px;}
+    .cta-section{padding:36px;}
+    .form-panel{padding:28px;}
+    .check-grid{grid-template-columns:1fr;}
+    .duo-panel{padding:32px;}
+    .industry-display{padding:28px;}
+    .section{padding:80px 0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#home" class="logo"><span class="logo-mark">M</span>MOON TECHNOLOGY</a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#work">Our Work</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost">Talk to an expert</a>
+      <a href="#contact" class="btn btn-primary btn-arrow">Start a project</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <a href="#solutions">Solutions</a>
+  <a href="#work">Our Work</a>
+  <a href="#process">Process</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="btn btn-primary btn-arrow">Start a project</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-grid"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow">DIGITAL TRANSFORMATION STUDIO</div>
+        <h1>We turn business problems into digital systems.</h1>
+        <p class="hero-sub">We build practical software for businesses that still run on spreadsheets, WhatsApp and phone calls — inventory, sales, accounting, e-commerce and the automation that connects them.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary btn-arrow">Start your project</a>
+          <a href="#contact" class="btn btn-ghost">Talk to an expert</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="hero-lines" viewBox="0 0 400 420" preserveAspectRatio="none">
+          <path d="M40 60 L200 140 L340 90" />
+          <path d="M60 300 L200 220 L300 340" />
+        </svg>
+        <div class="hero-chip chip-1"><span class="dot"></span>Inventory synced — <b>2,140 SKUs</b></div>
+        <div class="hero-chip chip-2">Monthly revenue<br><b>+18.4%</b></div>
+        <div class="hero-chip chip-3">New lead assigned to <b>Arbab</b></div>
+        <div class="hero-chip chip-4">Invoice #0412 — <b>Paid</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOPILOT BANNER -->
+  <section class="autopilot" id="automation">
+    <div class="wrap autopilot-grid">
+      <div>
+        <div class="eyebrow">RUN ON AUTOPILOT</div>
+        <h2>Stop managing. Start reviewing.</h2>
+        <p class="autopilot-problem">Are you facing management issues — chasing stock counts, sales calls and pending payments every single day?</p>
+        <p class="autopilot-solution">Problem solved. Once your system is live, it runs the daily operations for you — and your <b>system agent</b> sends a clear update every morning, wherever you are. Take the vacation. We've got your business covered.</p>
+        <ul class="autopilot-list">
+          <li>Sales performance</li>
+          <li>Finance &amp; payments</li>
+          <li>Inventory &amp; stock</li>
+          <li>Customer follow-ups</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-arrow">Automate my business</a>
+      </div>
+      <div>
+        <div class="scene-hint">DRAG TO SEE THE SHIFT →</div>
+        <div class="autopilot-scene">
+
+          <div class="scene-panel scene-before">
+            <svg class="scene-svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">
+              <path d="M35 45 L48 68 L22 68 Z" fill="none" stroke="#D3695C" stroke-width="2"/>
+              <line x1="35" y1="53" x2="35" y2="60" stroke="#D3695C" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="35" cy="64" r="1.3" fill="#D3695C"/>
+              <g class="jitter">
+                <path d="M118 28 L126 38 L116 44 L124 53" stroke="#D3695C" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M202 28 L194 38 L204 44 L196 53" stroke="#D3695C" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              </g>
+              <circle cx="160" cy="70" r="26" fill="var(--panel)" stroke="#ECEFF0" stroke-width="2.5"/>
+              <circle cx="150" cy="66" r="2" fill="#ECEFF0"/>
+              <circle cx="170" cy="66" r="2" fill="#ECEFF0"/>
+              <path d="M148 83 Q160 75 172 83" stroke="#D3695C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M132 100 Q108 84 131 65" stroke="#ECEFF0" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M188 100 Q212 84 189 65" stroke="#ECEFF0" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <circle cx="131" cy="65" r="5" fill="#ECEFF0"/>
+              <circle cx="189" cy="65" r="5" fill="#ECEFF0"/>
+              <path d="M130 98 Q160 91 190 98 L197 150 L123 150 Z" fill="#1B2025" stroke="#333a40" stroke-width="1.5"/>
+              <rect x="55" y="150" width="210" height="7" fill="#262C32"/>
+              <rect x="68" y="132" width="28" height="19" fill="#20262A" stroke="#3a4046" transform="rotate(-9 82 141)"/>
+              <rect x="92" y="127" width="24" height="17" fill="#20262A" stroke="#3a4046" transform="rotate(7 104 135)"/>
+              <rect x="218" y="129" width="26" height="17" fill="#20262A" stroke="#3a4046" transform="rotate(11 231 137)"/>
+              <g class="ring">
+                <rect x="252" y="58" width="13" height="22" rx="2" fill="#20262A" stroke="#D3695C" stroke-width="1.4"/>
+                <path d="M269 55 Q278 66 269 77" stroke="#D3695C" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M276 49 Q289 66 276 83" stroke="#D3695C" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.6"/>
+              </g>
+              <polyline points="30,188 50,178 65,193 84,172" stroke="#D3695C" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <div class="scene-label">BEFORE AUTOMATION</div>
+              <div class="scene-tags">
+                <span>No control on inventory</span>
+                <span>Don't know the finances</span>
+                <span>Running it all alone</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scene-panel scene-after" id="sceneAfter">
+            <svg class="scene-svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">
+              <circle cx="262" cy="34" r="26" fill="#E6BB66" opacity="0.12"/>
+              <circle cx="262" cy="34" r="16" fill="none" stroke="#E6BB66" stroke-width="2.5"/>
+              <path d="M40 195 Q52 130 45 85" stroke="#8C752F" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <path d="M45 85 Q18 74 6 90" stroke="#5FCB8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M45 85 Q64 68 84 78" stroke="#5FCB8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M45 85 Q36 60 48 44" stroke="#5FCB8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <line x1="178" y1="182" x2="178" y2="92" stroke="#3a4046" stroke-width="3"/>
+              <path d="M136 92 Q178 54 220 92 Z" fill="#CE9F4C" opacity="0.85"/>
+              <g class="bob">
+                <path d="M112 178 L232 178 L216 148 L132 152 Z" fill="#1B2025" stroke="#3a4046" stroke-width="1.5"/>
+                <path d="M132 152 L120 118" stroke="#3a4046" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="130" cy="107" r="17" fill="var(--panel)" stroke="#ECEFF0" stroke-width="2.2"/>
+                <rect x="120" y="102" width="20" height="6" rx="3" fill="#0A0C0E" stroke="#ECEFF0" stroke-width="1"/>
+                <path d="M123 115 Q130 119 137 115" stroke="#ECEFF0" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M130 107 Q106 97 101 80" stroke="#ECEFF0" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M141 119 Q182 132 212 151" stroke="#ECEFF0" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <path d="M212 151 Q233 159 248 171" stroke="#ECEFF0" stroke-width="6" fill="none" stroke-linecap="round"/>
+              </g>
+              <rect x="150" y="169" width="34" height="4" fill="#20262A"/>
+              <rect x="152" y="142" width="30" height="26" rx="2" fill="#0A0C0E" stroke="#3a4046" stroke-width="1.4"/>
+              <polyline points="156,161 164,151 172,155 180,145" stroke="#5FCB8B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M94 180 L98 192 L106 192 L110 180 Z" fill="none" stroke="#ECEFF0" stroke-width="1.4"/>
+              <line x1="102" y1="180" x2="105" y2="169" stroke="#ECEFF0" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M105 169 L110 173" stroke="#CE9F4C" stroke-width="1.4" stroke-linecap="round"/>
+              <text x="252" y="118" font-family="IBM Plex Mono, monospace" font-size="14" fill="#E6BB66" opacity="0.85">₹</text>
+              <text x="270" y="92" font-family="IBM Plex Mono, monospace" font-size="12" fill="#E6BB66" opacity="0.55">₹</text>
+              <text x="244" y="72" font-family="IBM Plex Mono, monospace" font-size="10" fill="#E6BB66" opacity="0.35">₹</text>
+              <path d="M0 196 Q40 189 80 196 T160 196 T240 196 T320 196" stroke="#3a4046" stroke-width="2" fill="none" opacity="0.6"/>
+            </svg>
+            <div>
+              <div class="scene-label">WITH AUTOMATION</div>
+              <div class="scene-tags">
+                <span>Inventory tracks itself</span>
+                <span>Daily finance updates</span>
+                <span>Business runs without you</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scene-divider" id="sceneDivider"></div>
+          <div class="scene-handle" id="sceneHandle">⇔</div>
+          <input type="range" class="scene-range" id="sceneRange" min="0" max="100" value="15" aria-label="Swipe to reveal business after automation">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><div class="stat-num" data-target="50">0</div><div class="stat-label">Projects delivered</div></div>
+      <div class="stat"><div class="stat-num" data-target="12">0</div><div class="stat-label">Industries served</div></div>
+      <div class="stat"><div class="stat-num" data-target="24">0</div><div class="stat-label">Hour support availability</div></div>
+      <div class="stat"><div class="stat-num" data-target="15">0</div><div class="stat-label">Developers &amp; designers</div></div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">THE PROBLEM</div>
+        <h2>Your business is growing. Your systems should too.</h2>
+        <p>Drag the divider to see what changes when scattered tools become one system.</p>
+      </div>
+      <div class="compare">
+        <div class="compare-panel compare-before">
+          <div class="compare-label">BEFORE</div>
+          <ul class="compare-list">
+            <li>Stock tracked across three Excel sheets</li>
+            <li>Orders confirmed over WhatsApp</li>
+            <li>Sales follow-ups remembered, not scheduled</li>
+            <li>Reports built manually, once a month</li>
+            <li>No single view of the business</li>
+          </ul>
+          <div class="compare-tag">MANUAL OPERATIONS</div>
+        </div>
+        <div class="compare-panel compare-after" id="afterPanel">
+          <div class="compare-label">AFTER</div>
+          <ul class="compare-list">
+            <li>Real-time stock across every location</li>
+            <li>Orders logged and tracked automatically</li>
+            <li>Follow-ups triggered on schedule</li>
+            <li>Reports generated live, on demand</li>
+            <li>One dashboard for the whole business</li>
+          </ul>
+          <div class="compare-tag">ONE PLATFORM</div>
+        </div>
+        <div class="compare-divider" id="compareDivider"></div>
+        <div class="compare-handle" id="compareHandle">⇔</div>
+        <input type="range" class="compare-range" id="compareRange" min="0" max="100" value="50" aria-label="Compare before and after">
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section alt" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">WHAT WE BUILD</div>
+        <h2>Technology designed around the way your business actually works.</h2>
+        <p>Nine capabilities, one team — from a single accounting fix to a full custom platform.</p>
+      </div>
+      <div class="services-grid" id="servicesGrid">
+        <!-- cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS / INDUSTRIES -->
+  <section class="section" id="solutions">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">SOLUTIONS BY INDUSTRY</div>
+        <h2>Your industry. Your problem. Our technology.</h2>
+        <p>Select an industry to see the modules businesses like yours use most.</p>
+      </div>
+      <div class="industry-pills" id="industryPills"></div>
+      <div class="industry-display">
+        <div>
+          <h3 id="industryName">Retail</h3>
+          <p class="sub" id="industrySub"></p>
+        </div>
+        <div class="stack-row" id="industryStack"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM SOFTWARE -->
+  <section class="section alt">
+    <div class="wrap flow-wrap">
+      <div>
+        <div class="eyebrow">CUSTOM SOFTWARE</div>
+        <h2 style="font-size:clamp(28px,3.4vw,40px);">Don't change your business. Change the system behind it.</h2>
+        <p style="margin-top:18px; color:var(--text-dim); max-width:48ch;">Every business works differently. Instead of forcing your team to adapt to generic software, we build technology around your existing workflow.</p>
+        <a href="#contact" class="btn btn-primary btn-arrow" style="margin-top:30px;">Build my system</a>
+      </div>
+      <div class="flow" id="flowTrack">
+        <div class="flow-node"><div class="flow-dot">01</div><span class="label">Business</span></div>
+        <div class="flow-node"><div class="flow-dot">02</div><span class="label">Workflow</span></div>
+        <div class="flow-node"><div class="flow-dot">03</div><span class="label">Software</span></div>
+        <div class="flow-node"><div class="flow-dot">04</div><span class="label">Automation</span></div>
+        <div class="flow-node"><div class="flow-dot">05</div><span class="label">Data</span></div>
+        <div class="flow-node"><div class="flow-dot">06</div><span class="label">Growth</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">OUR WORK</div>
+        <h2>50+ projects. Real business problems, real digital solutions.</h2>
+      </div>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-cat">BUSINESS MANAGEMENT</div>
+          <h3>Inventory Management System</h3>
+          <div class="work-features">Inventory · Billing · Reports · Dashboard</div>
+          <a href="#contact" class="work-link btn-arrow">View project</a>
+        </div>
+        <div class="work-card">
+          <div class="work-cat">SALES MANAGEMENT</div>
+          <h3>Sales CRM Platform</h3>
+          <div class="work-features">Leads · Sales team · Follow-ups · Analytics</div>
+          <a href="#contact" class="work-link btn-arrow">View project</a>
+        </div>
+        <div class="work-card">
+          <div class="work-cat">E-COMMERCE</div>
+          <h3>E-commerce Platform</h3>
+          <div class="work-features">Storefront · Payments · Orders · Inventory</div>
+          <a href="#contact" class="work-link btn-arrow">View project</a>
+        </div>
+        <div class="work-card">
+          <div class="work-cat">FINANCE</div>
+          <h3>Business Accounting System</h3>
+          <div class="work-features">Invoices · Expenses · Payments · Reports</div>
+          <a href="#contact" class="work-link btn-arrow">View project</a>
+        </div>
+        <div class="work-card">
+          <div class="work-cat">SAAS</div>
+          <h3>Custom SaaS Platform</h3>
+          <div class="work-features">Multi-user · Dashboard · Subscriptions · Automation</div>
+          <a href="#contact" class="work-link btn-arrow">View project</a>
+        </div>
+        <div class="work-card">
+          <div class="work-cat">MOBILE APPLICATION</div>
+          <h3>Mobile Business App</h3>
+          <div class="work-features">Android · iOS · API · Notifications</div>
+          <a href="#contact" class="work-link btn-arrow">View project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">CASE STUDIES</div>
+        <h2>We don't just build software. We solve business problems.</h2>
+      </div>
+
+      <div class="case">
+        <div class="case-tag">RETAIL · INVENTORY</div>
+        <div class="case-grid">
+          <div class="case-col"><span>PROBLEM</span><p>The business managed 2,000+ products through spreadsheets, with no visibility into real stock levels.</p></div>
+          <div class="case-col"><span>SOLUTION</span><p>A centralized inventory system with barcode scanning, low-stock alerts and multi-location tracking.</p></div>
+          <div class="case-col"><span>RESULT</span><p>Real-time stock visibility, automated reporting and faster order processing across every outlet.</p></div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-tag">DISTRIBUTION · SALES</div>
+        <div class="case-grid">
+          <div class="case-col"><span>PROBLEM</span><p>Field sales tracked orders on paper, causing delays between the order and the invoice.</p></div>
+          <div class="case-col"><span>SOLUTION</span><p>A mobile sales app connected to a live CRM and billing dashboard for the whole team.</p></div>
+          <div class="case-col"><span>RESULT</span><p>Order-to-invoice time cut significantly, with full visibility into every sales rep's pipeline.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">OUR PROCESS</div>
+        <h2>From idea to deployment.</h2>
+      </div>
+      <div class="process-track" id="processTrack">
+        <div class="process-step"><div class="process-num">01</div><h4>Discover</h4><p>Understand your business, workflow and problems.</p></div>
+        <div class="process-step"><div class="process-num">02</div><h4>Plan</h4><p>Define features, technology and roadmap.</p></div>
+        <div class="process-step"><div class="process-num">03</div><h4>Design</h4><p>Create UI/UX prototypes and user journeys.</p></div>
+        <div class="process-step"><div class="process-num">04</div><h4>Develop</h4><p>Build the software with modern practices.</p></div>
+        <div class="process-step"><div class="process-num">05</div><h4>Test</h4><p>QA, security and usability testing.</p></div>
+        <div class="process-step"><div class="process-num">06</div><h4>Deploy</h4><p>Launch on production infrastructure.</p></div>
+        <div class="process-step"><div class="process-num">07</div><h4>Improve</h4><p>Monthly review, upkeep and support.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEW / SUPPORT -->
+  <section class="section alt" style="padding-top:0;">
+    <div class="wrap">
+      <div class="duo">
+        <div class="duo-panel">
+          <div class="eyebrow" style="margin-bottom:12px;">ONGOING PARTNERSHIP</div>
+          <h3>Your software should keep getting better.</h3>
+          <p class="desc">We don't disappear after launch. Every client gets a monthly technology review.</p>
+          <ul class="duo-list">
+            <li>System performance</li><li>Security</li>
+            <li>New feature requirements</li><li>User feedback</li>
+            <li>Analytics</li><li>UI/UX improvements</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost btn-arrow">Schedule monthly review</a>
+        </div>
+        <div class="duo-panel">
+          <div class="eyebrow" style="margin-bottom:12px;">24/7 SUPPORT</div>
+          <h3>When your business needs us, we're there.</h3>
+          <p class="desc">Technical issues shouldn't stop your business. Our team is available to troubleshoot and maintain.</p>
+          <ul class="duo-list">
+            <li>Technical support</li><li>Bug fixing</li>
+            <li>Monitoring</li><li>Maintenance</li>
+            <li>Updates</li><li>Emergency support</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost btn-arrow">Talk to support</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">WHY US</div>
+        <h2>Why businesses choose us</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">◆</div>
+          <h3>Business-first development</h3>
+          <p>We understand the business problem before writing the code.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">◇</div>
+          <h3>Experienced developers</h3>
+          <p>A team fluent across modern web, mobile and cloud technologies.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">□</div>
+          <h3>UI/UX designers</h3>
+          <p>Interfaces designed for real users, not just for developers.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">△</div>
+          <h3>Custom solutions</h3>
+          <p>No unnecessary features. We build what your business actually needs.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">○</div>
+          <h3>Scalable technology</h3>
+          <p>Systems designed to grow with your business, not against it.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">▽</div>
+          <h3>Long-term partnership</h3>
+          <p>We stay involved long after the system goes live.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- TEAM -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">THE TEAM</div>
+        <h2>The people behind the product</h2>
+        <p>Technology is built by people who understand both code and business.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="avatar">SD</div><h4>Software Developers</h4><p>Web, mobile and backend engineering.</p></div>
+        <div class="team-card"><div class="avatar">UX</div><h4>UI/UX Designers</h4><p>Interfaces built around real workflows.</p></div>
+        <div class="team-card"><div class="avatar">PM</div><h4>Project Managers</h4><p>Keeping delivery on time, every time.</p></div>
+        <div class="team-card"><div class="avatar">QA</div><h4>QA Engineers</h4><p>Testing for reliability before launch.</p></div>
+        <div class="team-card"><div class="avatar">CE</div><h4>Cloud Engineers</h4><p>Infrastructure that scales with you.</p></div>
+        <div class="team-card"><div class="avatar">BA</div><h4>Business Analysts</h4><p>Translating operations into requirements.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-section">
+        <h2>Have a business problem? Let's build the solution.</h2>
+        <p>Tell us what you're trying to improve. We'll help you figure out what technology you actually need.</p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn btn-primary btn-arrow">Start a project</a>
+          <a href="tel:+919136653743" class="btn btn-ghost">Call us</a>
+          <a href="mailto:hello@moontechnology.in" class="btn btn-ghost">Send an enquiry</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="eyebrow">GET IN TOUCH</div>
+        <h2 style="font-size:32px;">Let's talk about your business.</h2>
+        <p style="margin-top:16px; color:var(--text-dim);">Fill in the form and our team will get back to you within one business day.</p>
+        <div class="quick-contact">
+          <a class="quick-item" href="tel:+919136653743">Call us <span>+91 91366 53743</span></a>
+          <a class="quick-item" href="mailto:hello@moontechnology.in">Email us <span>hello@moontechnology.in</span></a>
+          <a class="quick-item" href="https://wa.me/919136653743" target="_blank" rel="noopener">WhatsApp us <span>Chat now</span></a>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <div class="form-progress" id="formProgress"></div>
+        <form id="projectForm">
+          <div class="form-step active" data-step="1">
+            <div class="form-step-label">STEP 01 / 06</div>
+            <h3>What's your name?</h3>
+            <input class="field" type="text" placeholder="Full name" required>
+          </div>
+          <div class="form-step" data-step="2">
+            <div class="form-step-label">STEP 02 / 06</div>
+            <h3>Your mobile number</h3>
+            <input class="field" type="tel" placeholder="Mobile number" required>
+          </div>
+          <div class="form-step" data-step="3">
+            <div class="form-step-label">STEP 03 / 06</div>
+            <h3>Your email address</h3>
+            <input class="field" type="email" placeholder="Email address" required>
+          </div>
+          <div class="form-step" data-step="4">
+            <div class="form-step-label">STEP 04 / 06</div>
+            <h3>Business type</h3>
+            <select class="field">
+              <option>Retail</option><option>Manufacturing</option><option>Distribution</option>
+              <option>E-commerce</option><option>Healthcare</option><option>Education</option>
+              <option>Real Estate</option><option>Logistics</option><option>Hospitality</option>
+              <option>Finance</option><option>Professional Services</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-step" data-step="5">
+            <div class="form-step-label">STEP 05 / 06</div>
+            <h3>What do you need?</h3>
+            <div class="check-grid" id="needsGrid">
+              <label class="check-item"><input type="checkbox">Inventory Management</label>
+              <label class="check-item"><input type="checkbox">Accounting Software</label>
+              <label class="check-item"><input type="checkbox">Sales Management / CRM</label>
+              <label class="check-item"><input type="checkbox">E-commerce Website</label>
+              <label class="check-item"><input type="checkbox">Business Website</label>
+              <label class="check-item"><input type="checkbox">Mobile App</label>
+              <label class="check-item"><input type="checkbox">SaaS Platform</label>
+              <label class="check-item"><input type="checkbox">Business Automation</label>
+            </div>
+          </div>
+          <div class="form-step" data-step="6">
+            <div class="form-step-label">STEP 06 / 06</div>
+            <h3>Tell us about your requirement</h3>
+            <textarea class="field" placeholder="A few lines about what you're trying to build or fix..."></textarea>
+          </div>
+
+          <div class="form-success" id="formSuccess" style="display:none;">
+            <div class="mark">✓</div>
+            <h3>Thank you. Your request has been received.</h3>
+            <p>Our team will contact you shortly.</p>
+          </div>
+
+          <div class="form-nav" id="formNav">
+            <button type="button" class="btn btn-ghost" id="backBtn" style="visibility:hidden;">Back</button>
+            <button type="button" class="btn btn-primary btn-arrow" id="nextBtn">Continue</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" class="logo"><span class="logo-mark">M</span>MOON TECHNOLOGY</a>
+        <p class="footer-desc">Custom technology and SaaS solutions for businesses ready to grow.</p>
+      </div>
+      <div class="footer-col">
+        <h5>NAVIGATE</h5>
+        <a href="#services">Services</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#work">Our Work</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>CONTACT</h5>
+        <p>+91 91366 53743</p>
+        <p>hello@moontechnology.in</p>
+        <p>India</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Moon Technology. All rights reserved.</span>
+      <span class="status"><span class="dot"></span>SYSTEMS ONLINE</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- MOBILE MENU ----------
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // ---------- STAT COUNTERS ----------
+  const stats = document.querySelectorAll('.stat-num');
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target, 10);
+        let current = 0;
+        const step = Math.max(1, Math.round(target / 40));
+        const suffix = target === 24 ? '/7' : '+';
+        const tick = () => {
+          current += step;
+          if (current >= target) { el.textContent = target + suffix; return; }
+          el.textContent = current;
+          requestAnimationFrame(tick);
+        };
+        tick();
+        statObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  stats.forEach(s => statObserver.observe(s));
+
+  // ---------- COMPARE SLIDER ----------
+  const range = document.getElementById('compareRange');
+  const afterPanel = document.getElementById('afterPanel');
+  const divider = document.getElementById('compareDivider');
+  const handle = document.getElementById('compareHandle');
+  function updateCompare(v){
+    afterPanel.style.setProperty('--reveal', v + '%');
+    divider.style.left = v + '%';
+    handle.style.left = v + '%';
+  }
+  range.addEventListener('input', e => updateCompare(e.target.value));
+  updateCompare(50);
+
+  // ---------- BOSS-TO-BEACH SWIPE SCENE ----------
+  const sceneRange = document.getElementById('sceneRange');
+  const sceneAfter = document.getElementById('sceneAfter');
+  const sceneDivider = document.getElementById('sceneDivider');
+  const sceneHandle = document.getElementById('sceneHandle');
+  function updateScene(v){
+    sceneAfter.style.setProperty('--reveal', v + '%');
+    sceneDivider.style.left = v + '%';
+    sceneHandle.style.left = v + '%';
+  }
+  if (sceneRange){
+    sceneRange.addEventListener('input', e => updateScene(e.target.value));
+    updateScene(15);
+  }
+
+  // ---------- SERVICES DATA ----------
+  const services = [
+    { n:'01', t:'Business Management Software', d:'Replace disconnected spreadsheets with one centralized platform.', f:['Inventory & billing','CRM & sales','Employee management','Purchase & reporting'] },
+    { n:'02', t:'Inventory Management', d:'Real-time stock visibility across every location.', f:['Stock tracking','Low-stock alerts','Warehouse management','Barcode integration'] },
+    { n:'03', t:'Sales & CRM', d:'A single pipeline for leads, follow-ups and performance.', f:['Lead management','Sales pipeline','Follow-up reminders','Performance dashboards'] },
+    { n:'04', t:'Accounting & Finance', d:'Invoices, expenses and reports, always up to date.', f:['Invoices & payments','Receivables & payables','GST-ready workflows','Financial reports'] },
+    { n:'05', t:'E-commerce Development', d:'A complete online store, built around your catalogue.', f:['Storefront & cart','Payment gateway','Order management','Delivery integration'] },
+    { n:'06', t:'Website Development', d:'Corporate, portfolio and lead-generation websites.', f:['Business websites','Landing pages','Booking websites','Service websites'] },
+    { n:'07', t:'Mobile App Development', d:'Android and iOS apps for customers and teams.', f:['Customer apps','Delivery apps','Marketplace apps','Employee apps'] },
+    { n:'08', t:'Custom SaaS Products', d:'Your business idea, built as a scalable platform.', f:['Multi-user systems','Subscription management','API integrations','Analytics'] },
+    { n:'09', t:'Business Automation', d:'Automate the repetitive work your team shouldn\'t do by hand.', f:['Automated notifications','Report generation','Customer follow-ups','Data synchronization'] },
+  ];
+  const grid = document.getElementById('servicesGrid');
+  grid.innerHTML = services.map((s,i) => `
+    <div class="service-card">
+      <div class="service-num">${s.n}</div>
+      <h3>${s.t}</h3>
+      <p>${s.d}</p>
+      <button class="service-toggle" data-i="${i}"><span class="plus">+</span> View features</button>
+      <ul class="service-features">${s.f.map(x => `<li>${x}</li>`).join('')}</ul>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.service-toggle').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.service-card').classList.toggle('open'));
+  });
+
+  // ---------- INDUSTRIES DATA ----------
+  const industries = {
+    'Retail': { sub:'Multi-location stock, billing and customers in one view.', stack:['Inventory','POS & Billing','Customer Management','Reports'] },
+    'Manufacturing': { sub:'From raw material to finished goods, fully tracked.', stack:['Production Tracking','Inventory','Purchase Management','Reports'] },
+    'Distribution': { sub:'Distributor and dealer networks, organized.', stack:['Inventory','Distributor Management','Sales','Payment Tracking'] },
+    'Healthcare': { sub:'Patient records and operations, simplified.', stack:['Appointment Scheduling','Patient Records','Billing','Reports'] },
+    'Education': { sub:'Admissions, fees and communication in one system.', stack:['Admissions','Fee Management','Attendance','Parent Communication'] },
+    'Logistics': { sub:'Shipments and fleets, tracked end to end.', stack:['Fleet Tracking','Order Management','Route Planning','Billing'] },
+    'Real Estate': { sub:'From lead to sale, with full visibility.', stack:['Lead Management','Property Management','CRM','Sales Dashboard'] },
+    'Hospitality': { sub:'Bookings and guest management, streamlined.', stack:['Booking Engine','Guest Management','Billing','Reports'] },
+    'Finance': { sub:'Compliance-ready records and reporting.', stack:['Accounting','Invoicing','Payment Tracking','Financial Reports'] },
+    'E-commerce': { sub:'Storefront, orders and stock, connected.', stack:['Storefront','Order Management','Inventory Sync','Payments'] },
+    'Professional Services': { sub:'Clients, projects and billing in one place.', stack:['Client Management','Project Tracking','Invoicing','Reports'] },
+    'Local Businesses': { sub:'Everything a growing local business needs, simplified.', stack:['Billing','Customer Management','Inventory','Reports'] },
+  };
+  const pillsWrap = document.getElementById('industryPills');
+  const industryName = document.getElementById('industryName');
+  const industrySub = document.getElementById('industrySub');
+  const industryStack = document.getElementById('industryStack');
+  Object.keys(industries).forEach((name, i) => {
+    const pill = document.createElement('button');
+    pill.className = 'industry-pill' + (i === 0 ? ' active' : '');
+    pill.textContent = name;
+    pill.addEventListener('click', () => {
+      pillsWrap.querySelectorAll('.industry-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      renderIndustry(name);
+    });
+    pillsWrap.appendChild(pill);
+  });
+  function renderIndustry(name){
+    const data = industries[name];
+    industryName.textContent = name;
+    industrySub.textContent = data.sub;
+    industryStack.innerHTML = data.stack.map((s,i) => `<span class="stack-chip">${s}</span>${i < data.stack.length-1 ? '<span class="stack-plus">+</span>' : ''}`).join('');
+  }
+  renderIndustry('Retail');
+
+  // ---------- FLOW LIGHT-UP ----------
+  const flowNodes = document.querySelectorAll('.flow-node');
+  const flowObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        flowNodes.forEach((n, i) => setTimeout(() => n.classList.add('lit'), i * 160));
+        flowObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  if (document.getElementById('flowTrack')) flowObserver.observe(document.getElementById('flowTrack'));
+
+  // ---------- PROCESS LIGHT-UP ----------
+  const processSteps = document.querySelectorAll('.process-step');
+  const processObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('lit'); });
+  }, { threshold: 0.5 });
+  processSteps.forEach(p => processObserver.observe(p));
+
+  // ---------- MARQUEE ----------
+  const techs = ['React','Next.js','Node.js','Python','Flutter','React Native','PHP','MySQL','PostgreSQL','MongoDB','AWS','Docker','REST APIs','AI / ML'];
+  const marqueeTrack = document.getElementById('marqueeTrack');
+  marqueeTrack.innerHTML = [...techs, ...techs].map(t => `<span>${t}</span>`).join('');
+
+  // ---------- MULTI-STEP FORM ----------
+  const steps = Array.from(document.querySelectorAll('.form-step'));
+  const progress = document.getElementById('formProgress');
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+  const formNav = document.getElementById('formNav');
+  const formSuccess = document.getElementById('formSuccess');
+  let current = 0;
+  progress.innerHTML = steps.map(() => '<i></i>').join('');
+  const dots = progress.querySelectorAll('i');
+
+  function render(){
+    steps.forEach((s,i) => s.classList.toggle('active', i === current));
+    dots.forEach((d,i) => d.classList.toggle('done', i <= current));
+    backBtn.style.visibility = current === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = current === steps.length - 1 ? 'Send project request' : 'Continue';
+  }
+  nextBtn.addEventListener('click', () => {
+    if (current < steps.length - 1) { current++; render(); }
+    else {
+      steps.forEach(s => s.style.display = 'none');
+      formNav.style.display = 'none';
+      formSuccess.style.display = 'block';
+    }
+  });
+  backBtn.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+  document.querySelectorAll('.check-item').forEach(item => {
+    item.addEventListener('click', () => setTimeout(() => item.classList.toggle('checked', item.querySelector('input').checked), 0));
+  });
+  render();
+</script>
+
+</body>
+</html>
